@@ -1,0 +1,46 @@
+0、前置设置
+git config --global user.name "<username>"   :机器全局配置用户名
+git config --global user.email "<email>"   ：机器全局配置邮箱
+git config --global/system --list/-l   :查看所有全局/系统配置
+
+1、创建版本库：进入到某个目录
+git init   ：初始化版本库管理(当前目录)
+git add <file>   :把file添加到stage区
+git commit -m "<comment>"  : 提交到repository
+git status   : 查看文件状态
+git diff <file>   : 查看文件变化内容
+git diff HEAD^ <file>  :比较上一版本变化
+2、回退
+git log   : 显示由近到远的日志
+git log --pretty=oneline  :日志在一行简洁显示
+git reset --hard head^  : 回退到上一个版本中（上上个版本head^^,以此类推，或者head~1,head~5)，并不保留修改
+git reset --soft head^  :回退到stage区
+git reset --mixed head^  :回退到工作区，保留修改
+git reflog   : 显示版本号和对应操作,指针位置
+git reset --hard <版本号>  ：回退到指定版本号位置
+git checkout -- <file>   : 丢弃工作区或者stage区的新修改
+3、删除文件
+rm <file> : 未commit，可以用checkout命令恢复，若commit,可以git reset --hard回退找回
+
+4、分支管理
+查看所有分支：  git branch
+创建分支：  git branch <name>
+切换分支：  git checkout <name>
+创建+切换分支：  git checkout –b <name>
+合并某分支到当前分支：  git merge <name>
+删除分支：  git branch –d <name>
+合并分支时禁用"Fast forward"模式：  git merge –-no-ff -m “注释” <name> （这样用git log才会保留有删除分支的版本信息）
+5、bug分支管理
+隐藏当前工作现场： git stash
+列出隐藏现场版本： git stash list
+恢复现场(未删除版本):  git stash apply
+恢复现场（删除版本）： git stash pop
+删除现场： git stash drop
+
+6、（远程）多人协作
+git remote -v   : 查看远程库详细信息
+git push origin master   : 将本地master分支推送到远程origin远程仓库
+git clone https://github.com/xyh0707/testgit   :克隆远程库到本地
+git checkout -b dev origin/dev   : 创建远程dev分支对接本地dev
+git branch --set-upstream dev origin/dev   :设置远程dev分支对接本地dev
+git pull   :拉取对接远程分支库到本地库
